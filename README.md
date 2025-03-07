@@ -2,7 +2,7 @@
 
 Submitted by: **Yuwen Zhang**
 
-This web app: **displays screenshots from different animes**
+This web app: **displays screenshots from different anime**
 
 Time spent: **5** hours spent in total
 
@@ -30,7 +30,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented required features:
 
-![Imgur GIF](https://i.imgur.com/F0soAh1.gif)
+![AnimeQuiz_Flashcards](https://github.com/user-attachments/assets/9cdfdca3-c47e-4c3c-8264-2bf8dd6fb7ef)
 
 GIF created with ScreenToGif
 
