@@ -1,0 +1,57 @@
+body {
+  /* background-color: gray; */
+  margin: 0;
+  height: 100vh;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+h2 {
+  height: 1rem;
+}
+
+.background {
+  background-color: rgb(206, 206, 206);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+/*background colors*/
+.easy {
+  background-color: rgb(142, 180, 157);
+}
+
+.medium {
+  background-color: rgb(236, 236, 181);
+}
+
+.hard {
+  background-color: rgb(163, 219, 215);
+}
+
+.heading {
+  text-align: center;
+}
+
+button {
+  padding: 1rem 1.5rem;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  font-size: 2rem;
+  transition: transform 0.1s, background-color 0.25s;
+  border: 0px;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background-color: rgb(41, 41, 41);
+}
+
+button:active {
+  color: black;
+  background-color: white;
+}
