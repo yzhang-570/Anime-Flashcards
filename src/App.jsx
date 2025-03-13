@@ -1,73 +1,176 @@
 import {React, useState} from 'react'
-import Flashcard from "./Flashcard.jsx"
+import Flashcard from "./components/Flashcard.jsx"
 import "./App.css"
+import Heading from "./components/Heading.jsx"
 
 /*key represents card-front, value represents card-back*/
-const cardInfo = [
-  ["https://staticg.sportskeeda.com/editor/2022/03/5d035-16466484525958-1920.jpg", "Demon Slayer: Kimetsu no Yaiba", "easy"],
-  ["https://static1.cbrimages.com/wordpress/wp-content/uploads/2024/02/screenshot-2024-02-28-at-8-22-25-pm.jpg", "Attack on Titan", "hard"],
-  ["https://thereviewmonster.blog/wp-content/uploads/2024/04/screenshot-2024-04-01-222412.png?w=1024", "Frieren", "easy"],
-  ["https://arumjournal.com/wp-content/uploads/2024/02/screenshot-2024-02-24-at-9.39.55e280afam.png?w=1024&h=666&crop=1", "The Apothecary Diaries", "easy"],
-  ["https://preview.redd.it/7iu0u6g1ca961.png?width=640&crop=smart&auto=webp&s=aef0dc0f8d27afcbb0666ec9978c37f4ecb6f88f", "Jujutsu Kaisen", "medium"],
-  ["https://preview.redd.it/uqph30l6izi81.jpg?width=640&crop=smart&auto=webp&s=d2c53ba9bd896f7b604525d7399ab7ee41e7803e", "Yuri on Ice", "hard"],
-  ["https://bloodgodpod.com/wp-content/uploads/2021/08/neon-genesis-evangelion.jpg", "Evangelion", "easy"],
-  ["https://staticg.sportskeeda.com/editor/2022/12/56a11-16699120846653-1920.jpg", "Blue Lock", "medium"],
-  ["https://pbs.twimg.com/media/E445x53XIAAdrLK.jpg", "Chainsaw Man", "medium"],
-  ["https://toonamifaithful.com/wp-content/uploads/2018/09/SAO3-Stills-1.jpg", "Sword Art Online", "hard"]
-]
+import cardInfo from "./data/data.js"
 
 const App = () => {
-  // ["Start!", "Press the next arrow to start the flashcards :)"]
-  const [currentCard, setCurrentCard] = useState()
+
+  /*Holds an array containing information (img source, name, bg color) for current card*/
+  const [currentCard, setCurrentCard] = useState(-1)
+  const [cardNumber, setCardNumber] = useState(-1) //index of current card in data array
 
   /*0 represents front, 1 represents back*/
-  const [cardState, setCardState] = useState(0)
+  const [cardState, setCardState] = useState(0) //front/back of card
+  const [guessText, setGuessText] = useState("") //input field text
+  const[correct, setCorrect] = useState("null")
 
-  /*chooses a random card and sets currentCard to selected card*/
   const displayNextCard = () => {
-    var cardNumber = 0
-    do {
-      cardNumber = parseInt(Math.random() * cardInfo.length)
+    var index = cardNumber
+    if(index + 1 < cardInfo.length) {
+      console.log("cardNumber before: " + cardNumber)
+      index += 1
     }
-    while(cardInfo[cardNumber] == currentCard)
 
-    setCurrentCard(cardInfo[cardNumber])
+    //cardNumber is not updated yet within same function call
+    //bc state is immutable in the same render
 
+    //all state are set to their updated value AFTER new render
+
+    //use a separate variable like index
+    //if you want to use an updated value in the SAME render
+
+    setCardNumber(index)
+    setCurrentCard(cardInfo[index])
     setCardState(0)
+    setCorrect("null")
+  }
+
+  // console.log(cardNumber)
+
+  const displayPrevCard = () => {
+    var index = cardNumber
+    if(index - 1 >= 0) {
+      console.log("cardNumber before: " + cardNumber)
+      index -= 1
+    }
+
+    setCardNumber(index)
+    setCurrentCard(cardInfo[index])
+    setCardState(0)
+    setCorrect("null")
   }
 
   const flipCard = () => {
     cardState === 0 ? setCardState(1) : setCardState(0)
-    // setCardState((cardState + 1) % 2) /*0 -> 1, 1 -> 0; stays within index range*/
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault() //prevent refresh on submit
+    var newGuessText = guessText + ""
+    var correctAns = currentCard[1] + ""
+
+    if(cardState == 0) {
+      console.log(correctAns)
+      console.log(newGuessText.toLowerCase())
+      if(correctAns.toLowerCase().includes(newGuessText.toLowerCase())) {
+        flipCard()
+        setCorrect("correct-color")
+      }
+      else {
+        setCorrect("false-color")
+      }
+      setGuessText("")
+    }
+    else {
+      alert("no cheating :), flip the card back and try again")
+      setGuessText("")
+      setCardState(0)
+    }
+
   }
 
   return (
     <>
       {
-        currentCard ? (
-        <div className={"background " + currentCard[2]}>
-          <div className="heading">
-            <h1>Guess the anime!</h1>
-            <h2>Can you name the following titles based on a screenshot?</h2>
-            <p>Number of cards: 10</p>
-          </div>
-          <Flashcard currentCard={currentCard} cardState={cardState} flipCard={flipCard}/>
-          <button onClick={displayNextCard}>→</button>
-        </div>
-        ) :
+        cardNumber == -1 && currentCard && currentCard == -1 ? 
+        //if cards have not been loaded
         (
           <div className={"background"}>
-            <div className="heading">
-              <h1>Guess the anime!</h1>
-              <h2>Can you name the following titles based on a screenshot?</h2>
-              <p>Number of cards: 10</p>
-            </div>
-            <button onClick={displayNextCard}>→</button>
+            <Heading />
+            <button className="nav-button" onClick={displayNextCard}>→</button>
           </div>
+        )
+        :
+        (
+        //if cards have loaded
+        <div className={"background " + currentCard[2]}>
+          <Heading />
+
+          <Flashcard currentCard={currentCard} cardState={cardState} flipCard={flipCard} correct={correct}/>
+
+          <form onSubmit={handleSubmit}>
+            <>
+              <input type="text" value={guessText} onChange={(e) => {setGuessText(e.target.value)}} placeholder="Type your guess here :)"></input>
+              <button className="submit-button" type="submit">Submit Answer</button>
+            </>
+            {/*ignore error message, it's just bc of the > bracket*/}
+            {correct=="false-color" && <p id="false-msg">Incorrect. Try again :></p>}
+            {correct=="correct-color" && <p id="correct-msg">Correct!</p>}
+          </form>
+
+          <div className="button-div">
+            {
+              //determine if BACK button should be greyed out
+              cardNumber == 0 ? (
+                <button className="nav-button-greyed" onClick={displayPrevCard}>←</button>
+              )
+              :
+              (
+                <button className="nav-button" onClick={displayPrevCard}>←</button>
+              )
+            }
+            {
+              //determine if FORWARD button should be greyed out
+              cardNumber == cardInfo.length - 1 ? (
+                <button className="nav-button-greyed" onClick={displayNextCard}>→</button>
+              )
+              :
+              (
+                <button className="nav-button" onClick={displayNextCard}>→</button>
+              )
+            }
+          </div>
+          
+        </div>
         )
       }
     </> 
   )
+  
 }
 
 export default App
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*chooses a random card and sets currentCard to selected card*/
+// ORIGINAL displayNextCard()
+// const displayNextCard = () => {
+//   //TODO: remove randomization
+//   // var cardNumber = 0
+//   // do {
+//   //   cardNumber = parseInt(Math.random() * cardInfo.length)
+//   // }
+//   // while(cardInfo[cardNumber] == currentCard)
+
+//   // console.log(cardNumber)
+  
+//   setCurrentCard(cardInfo[cardNumber])
+//   setCardState(0)
+// }

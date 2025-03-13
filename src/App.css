@@ -16,8 +16,9 @@ h2 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
 }
+
 
 /*background colors*/
 .easy {
@@ -36,8 +37,11 @@ h2 {
   text-align: center;
 }
 
-button {
-  padding: 1rem 1.5rem;
+
+/*forward & back button styling*/
+.nav-button {
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
   background-color: black;
   color: white;
   border-radius: 5px;
@@ -46,12 +50,66 @@ button {
   border: 0px;
 }
 
-button:hover {
+.nav-button-greyed {
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  background-color: rgb(99, 99, 99);
+  color: white;
+  border-radius: 5px;
+  font-size: 2rem;
+  transition: transform 0.1s, background-color 0.25s;
+  border: 0px;
+}
+
+.nav-button:hover {
   transform: scale(1.05);
   background-color: rgb(41, 41, 41);
 }
 
-button:active {
+.nav-button:active {
   color: black;
   background-color: white;
+}
+
+
+input[type=text] {
+  padding: 0.5rem 1rem;
+  /* border: 1px solid gray; */
+  border: 0px;
+  transition: background-color 0.5s;
+}
+
+input[type=text]:focus {
+  /* border: 1px solid black; */
+  border: 0px;
+  outline: 0;
+}
+
+.submit-button {
+  padding: 0.5rem 0.5rem;
+  background-color: rgb(167, 167, 167);
+  color: white;
+  transition: transform 0.1s, background-color 0.25s;
+  border: 0px;
+}
+
+.submit-button:hover {
+  background-color: rgb(65, 65, 65);
+}
+
+.submit-button:active {
+  color: black;
+  background-color: white;
+}
+
+#false-msg {
+  height: 0px;
+  color: red;
+  margin: 5px;
+}
+
+#correct-msg {
+  height: 0px;
+  color: green;
+  margin: 5px;
 }

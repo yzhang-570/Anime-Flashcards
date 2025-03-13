@@ -1,14 +1,14 @@
 import {React} from 'react'
-import "./Flashcard.css"
+import "../Flashcard.css"
 
-const Flashcard = ({ currentCard, cardState, flipCard}) => {
+const Flashcard = ({ currentCard, cardState, flipCard, correct}) => {
 
   if(!currentCard) {
     return null
   }
 
   return (
-    <div onClick={flipCard} className="flashcard-div">
+    <div onClick={flipCard} className={`flashcard-div ${correct}`}>
       {
         cardState == 0 ? 
         <img src={currentCard[cardState]}/> :
