@@ -1,46 +1,45 @@
-# Web Development Project 2 - *Anime Quiz Flashcards*
+# Web Development Project 3 - Anime Quiz Flashcards
 
 Submitted by: **Yuwen Zhang**
 
-This web app: **displays screenshots from different anime**
+This web app: **Allows the user to guess the name of different anime**
 
-Time spent: **5** hours spent in total
+Time spent: **3** hours spent in total
 
 ## Required Features
 
 The following **required** functionality is completed:
 
-- [X] **The title of the card set and some information about it, such as a short description and the total number of cards are displayed**
-- [X] **A single card at a time is displayed, only showing one of the components of the information pair**
-- [X] **A list of card pairs is created**
-- [X] **Clicking on the card shows the corresponding component of the information pair**
-- [X] **Clicking the next button displays a random new card**
+- [X] **The user can enter their guess in a box before seeing the flipside of the card**
+- [X] **Clicking on a submit button shows visual feedback about whether the answer was correct or incorrect**
+- [X] **A back button is displayed on the card and can be used to return to the previous card in a set sequence**
+- [X] **A next button is displayed on the card and can be used to navigate to the next card in a set sequence**
 
 The following **optional** features are implemented:
 
-- [X] Cards contains images in addition to or in place of text
-- [X] Cards have different visual styles such as color based on their category
-  - [X] The background color varies by how difficult it likely is to guess the name of an anime by the image provided.
+- [ ] A shuffle button is used to randomize the order of the cards
+- [X] A user's answer may be counted as correct even when it is slightly different from the target answer
+- [ ] A counter displays the user's current and longest streak of correct responses
+- [ ] A user can mark a card that they have mastered and have it removed from the pool of answers as well as added to a list of mastered cards
 
 The following **additional** features are implemented:
 
-* [ ] None at the moment, but I hope to go back and try to add the flipping animation and more to the background when I have time.
+* [ ] List anything else that you added to improve the site's functionality!
 
 ## Video Walkthrough
 
-Here's a walkthrough of implemented required features:
+Here's a walkthrough of Anime Quiz Flashcards:
 
-![AnimeQuiz_Flashcards](https://github.com/user-attachments/assets/9cdfdca3-c47e-4c3c-8264-2bf8dd6fb7ef)
 
 GIF created with ScreenToGif
 
 ## Notes
 
-When I was trying to implement the functionality for displaying a random card when the next button is pressed, the information on the card often didn't display properly. At first, I thought this was due to not handling conditional rendering properly. However, after some futile attempts to change how I was doing conditional rendering, I realized that my problem was simply that I was missing a comma in the array holding the information for all of the cards. 
+Due to not having a full understanding of how state works in React between or during renders, I had a lot of trouble trying to make sure that my states were being updated accordingly at first. However, after doing a bit of research on the internet and learning more about technicalities surrounding React states, I was able to resolve these issues and implement the required features.
 
 ## License
 
-    Copyright 2025 Yuwen Zhang
+    Copyright [2025] [Yuwen Zhang]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
