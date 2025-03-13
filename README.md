@@ -29,7 +29,7 @@ The following **additional** features are implemented:
 ## Video Walkthrough
 
 Here's a walkthrough of Anime Quiz Flashcards:
-
+![AnimeQuiz_Flashcards](https://github.com/user-attachments/assets/34a17ae3-1d04-496c-be4f-e329d3eb90d4)
 
 GIF created with ScreenToGif
 
